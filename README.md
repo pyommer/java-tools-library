@@ -2,10 +2,10 @@
 
 Packages:
 
-	- data
-	- images
-	- math
-	- utilities
+	- data	- contains packages of classes useful in data structures
+	- images	- contains classes useful in image processing
+	- math	- contains packages of classes useful in different math applications
+	- utilities	- contains classes with useful static functions
 
 # Description:
 
