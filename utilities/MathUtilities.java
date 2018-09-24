@@ -26,12 +26,8 @@ public class MathUtilities
     {
         int max = a[0];
         for (int i : a)
-        {
             if (i > max)
-            {
                 max = i;
-            }
-        }
         return max;
     }
 
@@ -45,12 +41,8 @@ public class MathUtilities
     {
         int min = a[0];
         for (int i : a)
-        {
             if (i < min)
-            {
                 min = i;
-            }
-        }
         return min;
     }
 
@@ -95,9 +87,7 @@ public class MathUtilities
     public static int geometricSummation(int c, int r, int n)
     {
         if ((r == 1) || (n < 1))
-        {
             return 0;
-        }
         return c * (((int) Math.pow((double) r, (double) n)) - 1) / (r - 1);
     }
 
@@ -131,9 +121,7 @@ public class MathUtilities
     public static int binomialSummation(int x, int y, int n)
     {
         if (n > 0)
-        {
             return (int) Math.pow((double) (x + y), (double) n);
-        }
         return 1;
     }
 
@@ -150,9 +138,7 @@ public class MathUtilities
     public static int binomialCoeffIterative(int n, int k)
     {
         if ((0 < k) && (k < n))
-        {
             return chooseIterative(n - 1, k - 1) + chooseIterative(n - 1, k);
-        }
         return 1;
     }
 
@@ -170,9 +156,7 @@ public class MathUtilities
     {
         int[] row = rowPascalTriangleDynamic(n);
         if (row != null)
-        {
             return row[k - 1];
-        }
         return 1;
     }
 
@@ -188,14 +172,10 @@ public class MathUtilities
     public static int factIterative(int n)
     {
         if (n < 2)
-        {
             return 1;
-        }
         int fact = n;
         for (int i = n - 1; i > 1; i--)
-        {
             fact *= i;
-        }
         return fact;
     }
 
@@ -212,14 +192,10 @@ public class MathUtilities
     public static int chooseDynamic(int n, int k)
     {
         if (n < 2)
-        {
             return 1;
-        }
         int fact = n;
         for (int i = n - 1; i > k; i--)
-        {
             fact *= i;
-        }
         return fact / factIterative(n - k);
     }
 
@@ -252,9 +228,7 @@ public class MathUtilities
     public static int gcdDynamic(int x, int y)
     {
         if (Math.floorMod(x, y) == 0)
-        {
             return y;
-        }
 
         int a = y;
         int b = Math.floorMod(x, y);
@@ -280,20 +254,14 @@ public class MathUtilities
     public static long fibDynamic(int n)
     {
         if (n < 1)
-        {
             return 0;
-        }
         if (n < 2)
-        {
             return 1;
-        }
         long[] fib = new long[n + 1];
         fib[0] = 0;
         fib[1] = 1;
         for (int i = 2; i <= n; i++)
-        {
             fib[i] = fib[i - 1] + fib[i - 2];
-        }
         return fib[n];
     }
 
@@ -310,17 +278,11 @@ public class MathUtilities
     public static long fibMemoize(int n, int[] mem)
     {
         if (mem[n] >= 0)
-        {
             return mem[n];
-        }
         if (n < 1)
-        {
             return 0;
-        }
         if (n < 2)
-        {
             return 1;
-        }
         return fibMemoize(n - 1, mem) + fibMemoize(n - 2, mem);
     }
 
@@ -354,9 +316,7 @@ public class MathUtilities
                 triangle[i - 1][i - 1] = 1;
 
                 for (int j = 1; j < i - 1; j++)
-                {
                     triangle[i - 1][j] = triangle[i - 2][j - 1] + triangle[i - 2][j];
-                }
             }
         }
         return triangle[n - 1];
@@ -373,13 +333,9 @@ public class MathUtilities
         if (row != null)
         {
             for (int j = n; j > row.length; j--)
-            {
                 System.out.print("  ");
-            }
             for (int r : row)
-            {
                 System.out.printf("%-3d ", r);
-            }
             System.out.println();
         }
     }
@@ -411,12 +367,8 @@ public class MathUtilities
     public static boolean isPrime(int x)
     {
         for (int i = 2; i <= x / 2; i++)
-        {
             if (Math.floorMod(x, i) == 0)
-            {
                 return false;
-            }
-        }
         return true;
     }
 
@@ -447,9 +399,7 @@ public class MathUtilities
     public static int countValidParentheses(int n)
     {
         if (n < 1)
-        {
             return 1;
-        }
         return chooseIterative(2 * n, n) / (n + 1);
     }
 
@@ -473,13 +423,9 @@ public class MathUtilities
         {
             sum += i;
             if (i > x)
-            {
                 x = i;
-            }
             if (i < y)
-            {
                 y = i;
-            }
         }
         return new long[]{sum - x, sum - y};
     }
@@ -497,9 +443,7 @@ public class MathUtilities
     public static int maxNonAdjacentSubsetSum(int[] array)
     {
         if (array.length < 3)
-        {
             return 0;
-        }
 
         int x = array[0];
         int y = 0;
@@ -534,9 +478,7 @@ public class MathUtilities
         {
             // check if hashtable contains i-th value as sum complement
             if (table.containsKey(array[i]))
-            {
                 return new int[]{table.get(array[i]) + 1, i + 1};
-            }
 
             // add complement of i-th value to hashtable
             table.put(sum - array[i], i);
@@ -565,9 +507,7 @@ public class MathUtilities
         {
             // check if hashtable contains i-th value as sum complement
             if (set.contains(array[i]))
-            {
                 return new int[]{sum - array[i], array[i]};
-            }
 
             // add complement of i-th value to hashtable
             set.add(sum - array[i]);
@@ -609,9 +549,7 @@ public class MathUtilities
         // compute minimum local rank sum
         long sum = 0;
         for (int i = 0; i < n; i++)
-        {
             sum += Math.max(left[i], right[i]);
-        }
 
         return sum;
     }
@@ -689,9 +627,7 @@ public class MathUtilities
             len = findShortest(i, from, to, ids);
 
             if ((len > 0) && ((len < min) || (min == -1)))
-            {
                 min = len;
-            }
         }
         return min;
     }
@@ -723,9 +659,7 @@ public class MathUtilities
             len = findShortest(i, from, to, ids);
 
             if ((len > 0) && ((len < min) || (min == -1)))
-            {
                 min = i;
-            }
         }
         return min;
     }
@@ -868,12 +802,9 @@ public class MathUtilities
                 System.out.print("(" + t.id + ", " + t.value + ")\t");
 
                 for (Integer i : t.adj)
-                {
                     if (!queue.contains(i + 1))
-                    {
                         System.out.print("(" + (i + 1) + ") ");
-                    }
-                }
+
                 System.out.println();
             }
             System.out.println();
@@ -944,13 +875,9 @@ public class MathUtilities
                 if (from[i] == node.id)
                 {
                     if (node.left == null)
-                    {
                         node.left = nodes[to[i] - 1];
-                    }
                     else
-                    {
                         node.right = nodes[to[i] - 1];
-                    }
                 }
             }
         }
@@ -1035,9 +962,7 @@ public class MathUtilities
     public static void printArray(int[] array)
     {
         for (int a : array)
-        {
             System.out.print(a + " ");
-        }
         System.out.println();
     }
 
@@ -1066,9 +991,7 @@ public class MathUtilities
     public static void swapBitwise(int x, int y, int[] array)
     {
         if (array[x] == array[y])
-        {
             return;
-        }
 
         array[x] = array[x] ^ array[y];
         array[y] = array[x] ^ array[y];
@@ -1093,9 +1016,7 @@ public class MathUtilities
     public static int[] quicksort(int[] array)
     {
         if (array.length > 1)
-        {
             quickStep(0, array.length - 1, array);
-        }
         return array;
     }
 
@@ -1119,21 +1040,15 @@ public class MathUtilities
             {
                 // scan right to find element larger than the pivot
                 while ((l <= r) && (array[l] <= pivot))
-                {
                     l++;
-                }
 
                 // scan left to find element smaller than the pivot
                 while ((l <= r) && (array[r] >= pivot))
-                {
                     r--;
-                }
 
                 // swap elements if both found
                 if (l < r)
-                {
                     swap(l, r, array);
-                }
             }
 
             // swap pivot with left element
@@ -1198,21 +1113,13 @@ public class MathUtilities
         for (int k = 0; k < sort.length; k++)
         {
             if (i >= a.length)
-            {
                 sort[k] = b[j++];
-            }
             else if (j >= b.length)
-            {
                 sort[k] = a[i++];
-            }
             else if (a[i] <= b[j])
-            {
                 sort[k] = a[i++];
-            }
             else
-            {
                 sort[k] = b[j++];
-            }
         }
         return sort;
     }
@@ -1237,9 +1144,7 @@ public class MathUtilities
         {
             // build initial max heap
             for (int i = array.length / 2 - 1; i >= 0; i--)
-            {
                 heapifyStep(array.length, i, array);
-            }
 
             // extract elements (one-by-one) from heap
             for (int i = array.length - 1; i >= 0; i--)
@@ -1268,13 +1173,9 @@ public class MathUtilities
 
         // update max position
         if ((l < size) && (array[l] > array[max]))
-        {
             max = l;
-        }
         if ((r < size) && (array[r] > array[max]))
-        {
             max = r;
-        }
 
         // swap and heapify until max at root
         if (max != pos)
