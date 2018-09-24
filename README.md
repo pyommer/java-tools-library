@@ -16,8 +16,8 @@ Packages:
 Packages:
 
 	- comparators	- contains Comparator implementations for generics
-	- searching		- contains implementations of common searching algorithms
-	- sorting		- contains implementations of common sorting algorithms
+	- searching	- contains implementations of common searching algorithms
+	- sorting	- contains implementations of common sorting algorithms
 	- structures	- contains packages of custom data structure implementations
 
 # Package: images
@@ -32,9 +32,9 @@ Files:
 
 Packages:
 
-	- complex		- contains classes used to implement different complex numbers
+	- complex	- contains classes used to implement different complex numbers
 	- distributions	- contains classes used to implement random variables
-	- signals		- contains classes used to implement signal analysis
+	- signals	- contains classes used to implement signal analysis
 
 Files:
 
@@ -44,5 +44,5 @@ Files:
 
 Files:
 
-	- CSV.java				- a class used for reading and parsing data in a .csv file
+	- CSV.java		- a class used for reading and parsing data in a .csv file
 	- MathUtilities.java	- a class containing useful functions in math applications
