@@ -56,7 +56,7 @@ public class MathUtilities
      */
     public static int simpleSummation(int n)
     {
-        return n * (n + 1) / 2;
+        return n*(n+1)/2;
     }
 
     /**
@@ -88,7 +88,7 @@ public class MathUtilities
     {
         if ((r == 1) || (n < 1))
             return 0;
-        return c * (((int) Math.pow((double) r, (double) n)) - 1) / (r - 1);
+        return c*(((int) Math.pow((double) r, (double) n))-1)/(r-1);
     }
 
     /**
@@ -121,7 +121,7 @@ public class MathUtilities
     public static int binomialSummation(int x, int y, int n)
     {
         if (n > 0)
-            return (int) Math.pow((double) (x + y), (double) n);
+            return (int) Math.pow((double) (x+y), (double) n);
         return 1;
     }
 
@@ -138,7 +138,7 @@ public class MathUtilities
     public static int binomialCoeffIterative(int n, int k)
     {
         if ((0 < k) && (k < n))
-            return chooseIterative(n - 1, k - 1) + chooseIterative(n - 1, k);
+            return chooseIterative(n-1, k-1) + chooseIterative(n-1, k);
         return 1;
     }
 
@@ -156,7 +156,7 @@ public class MathUtilities
     {
         int[] row = rowPascalTriangleDynamic(n);
         if (row != null)
-            return row[k - 1];
+            return row[k-1];
         return 1;
     }
 
@@ -174,7 +174,7 @@ public class MathUtilities
         if (n < 2)
             return 1;
         int fact = n;
-        for (int i = n - 1; i > 1; i--)
+        for (int i=n-1; i>1; i--)
             fact *= i;
         return fact;
     }
@@ -194,9 +194,9 @@ public class MathUtilities
         if (n < 2)
             return 1;
         int fact = n;
-        for (int i = n - 1; i > k; i--)
+        for (int i=n-1; i>k; i--)
             fact *= i;
-        return fact / factIterative(n - k);
+        return fact/factIterative(n-k);
     }
 
     /**
@@ -211,7 +211,7 @@ public class MathUtilities
      */
     public static int chooseIterative(int n, int k)
     {
-        return factIterative(n) / (factIterative(k) * factIterative(n - k));
+        return factIterative(n)/(factIterative(k)*factIterative(n-k));
     }
 
     /**
@@ -260,8 +260,8 @@ public class MathUtilities
         long[] fib = new long[n + 1];
         fib[0] = 0;
         fib[1] = 1;
-        for (int i = 2; i <= n; i++)
-            fib[i] = fib[i - 1] + fib[i - 2];
+        for (int i=2; i<=n; i++)
+            fib[i] = fib[i-1] + fib[i-2];
         return fib[n];
     }
 
@@ -283,7 +283,7 @@ public class MathUtilities
             return 0;
         if (n < 2)
             return 1;
-        return fibMemoize(n - 1, mem) + fibMemoize(n - 2, mem);
+        return fibMemoize(n-1, mem) + fibMemoize(n-2, mem);
     }
 
     /**
@@ -298,9 +298,7 @@ public class MathUtilities
     public static int[] rowPascalTriangleDynamic(int n)
     {
         if (n < 1)
-        {
             return null;
-        }
 
         int[][] triangle = new int[n][n];
         triangle[0][0] = 1;
@@ -310,16 +308,18 @@ public class MathUtilities
             triangle[1][0] = 1;
             triangle[1][1] = 1;
 
-            for (int i = 3; i <= n; i++)
+            for (int i=3; i<=n; i++)
             {
-                triangle[i - 1][0] = 1;
-                triangle[i - 1][i - 1] = 1;
+                triangle[i-1][0] = 1;
+                triangle[i-1][i-1] = 1;
 
-                for (int j = 1; j < i - 1; j++)
-                    triangle[i - 1][j] = triangle[i - 2][j - 1] + triangle[i - 2][j];
+                for (int j=1; j<i-1; j++)
+                {
+                    triangle[i-1][j] = triangle[i-2][j-1] + triangle[i-2][j];
+                }
             }
         }
-        return triangle[n - 1];
+        return triangle[n-1];
     }
 
     /**
@@ -332,7 +332,7 @@ public class MathUtilities
     {
         if (row != null)
         {
-            for (int j = n; j > row.length; j--)
+            for (int j=n; j>row.length; j--)
                 System.out.print("  ");
             for (int r : row)
                 System.out.printf("%-3d ", r);
@@ -366,7 +366,7 @@ public class MathUtilities
      */
     public static boolean isPrime(int x)
     {
-        for (int i = 2; i <= x / 2; i++)
+        for (int i=2; i<=x/2; i++)
             if (Math.floorMod(x, i) == 0)
                 return false;
         return true;
@@ -400,7 +400,7 @@ public class MathUtilities
     {
         if (n < 1)
             return 1;
-        return chooseIterative(2 * n, n) / (n + 1);
+        return chooseIterative(2*n, n)/(n+1);
     }
 
     /* -- common problems in reducing time complexity -- */
@@ -427,7 +427,7 @@ public class MathUtilities
             if (i < y)
                 y = i;
         }
-        return new long[]{sum - x, sum - y};
+        return new long[] {sum-x, sum-y};
     }
 
     /**
@@ -448,7 +448,7 @@ public class MathUtilities
         int x = array[0];
         int y = 0;
         int z;
-        for (int i = 1; i < array.length; i++)
+        for (int i=1; i<array.length; i++)
         {
             z = (x > y) ? x : y;
             x = y + array[i];
@@ -474,16 +474,18 @@ public class MathUtilities
         Hashtable<Integer, Integer> table = new Hashtable<>(array.length);
 
         // find first two values that sum to the sum, save complement as key
-        for (int i = 0; i < array.length; i++)
+        for (int i=0; i<array.length; i++)
         {
             // check if hashtable contains i-th value as sum complement
             if (table.containsKey(array[i]))
-                return new int[]{table.get(array[i]) + 1, i + 1};
+            {
+                return new int[] {table.get(array[i]) + 1, i+1};
+            }
 
             // add complement of i-th value to hashtable
-            table.put(sum - array[i], i);
+            table.put(sum-array[i], i);
         }
-        return new int[]{0, 0};
+        return new int[] {0, 0};
     }
 
     /**
@@ -503,16 +505,18 @@ public class MathUtilities
         HashSet<Integer> set = new HashSet<>(array.length);
 
         // find first two values that sum to the sum, save complement as key
-        for (int i = 0; i < array.length; i++)
+        for (int i=0; i<array.length; i++)
         {
             // check if hashtable contains i-th value as sum complement
             if (set.contains(array[i]))
-                return new int[]{sum - array[i], array[i]};
+            {
+                return new int[] {sum-array[i], array[i]};
+            }
 
             // add complement of i-th value to hashtable
-            set.add(sum - array[i]);
+            set.add(sum-array[i]);
         }
-        return new int[]{0, 0};
+        return new int[] {0, 0};
     }
 
     /**
@@ -536,19 +540,19 @@ public class MathUtilities
         right[n - 1] = 1;
 
         // set middle cases
-        for (int i = 1; i < n - 1; i++)
+        for (int i=1; i<n-1; i++)
         {
-            left[i] = (array[i] > array[i - 1]) ? left[i - 1] + 1 : 1;
-            right[n - i - 1] = (array[n - i - 1] > array[n - i]) ? right[n - i] + 1 : 1;
+            left[i] = (array[i] > array[i-1]) ? left[i - 1] + 1 : 1;
+            right[n-i-1] = (array[n-i-1] > array[n-i]) ? right[n-i] + 1 : 1;
         }
 
         // set end cases
-        left[n - 1] = (array[n - 1] > array[n - 2]) ? left[n - 2] + 1 : 1;
+        left[n-1] = (array[n-1] > array[n-2]) ? left[n-2] + 1 : 1;
         right[0] = (array[0] > array[1]) ? right[1] + 1 : 1;
 
         // compute minimum local rank sum
         long sum = 0;
-        for (int i = 0; i < n; i++)
+        for (int i=0; i<n; i++)
             sum += Math.max(left[i], right[i]);
 
         return sum;
@@ -615,9 +619,8 @@ public class MathUtilities
     {
         HashSet<Long> set = new HashSet<>(ids.length);
         for (long id : ids)
-        {
             set.add(id);
-        }
+
         Long[] id = new Long[set.size()];
         set.toArray(id);
         int min = -1;
@@ -647,9 +650,8 @@ public class MathUtilities
     {
         HashSet<Long> set = new HashSet<>(ids.length);
         for (long id : ids)
-        {
             set.add(id);
-        }
+
         Long[] id = new Long[set.size()];
         set.toArray(id);
         long min = -1;
@@ -683,28 +685,26 @@ public class MathUtilities
         int     n     = ids.length;
         int     flag  = 0;
         XNode[] nodes = new XNode[n];
-        for (int i = 0; i < n; i++)
+        for (int i=0; i<n; i++)
         {
             nodes[i] = new XNode(ids[i]);
             if (ids[i] == x)
-            {
                 flag++;
-            }
         }
 
         // verify two or more values in ids
         if (flag > 1)
         {
             // add adjacent nodes for edges length 1
-            for (int i = 0; i < from.length; i++)
+            for (int i=0; i<from.length; i++)
             {
-                nodes[from[i] - 1].adj.add(to[i] - 1);
-                nodes[to[i] - 1].adj.add(from[i] - 1);
+                nodes[from[i]-1].adj.add(to[i]-1);
+                nodes[to[i]-1].adj.add(from[i]-1);
             }
 
             // create queue of nodes with value
             Queue<Integer> list = new LinkedList<>();
-            for (int i = 0; i < n; i++)
+            for (int i=0; i<n; i++)
             {
                 if (nodes[i].value == x)
                 {
@@ -754,20 +754,18 @@ public class MathUtilities
         // build nodes list
         int     n     = ids.length;
         XNode[] nodes = new XNode[n];
-        for (int i = 0; i < n; i++)
-        {
-            nodes[i] = new XNode(i + 1, ids[i]);
-        }
+        for (int i=0; i<n; i++)
+            nodes[i] = new XNode(i+1, ids[i]);
 
         // add adjacent nodes for edges length 1
-        for (int i = 0; i < from.length; i++)
+        for (int i=0; i<from.length; i++)
         {
-            nodes[from[i] - 1].adj.add(to[i] - 1);
-            nodes[to[i] - 1].adj.add(from[i] - 1);
+            nodes[from[i]-1].adj.add(to[i]-1);
+            nodes[to[i]-1].adj.add(from[i]-1);
         }
 
         // create queue of nodes
-        for (int i = 0; i < n; i++)
+        for (int i=0; i<n; i++)
         {
             nodes[i].init(i);
 
@@ -802,9 +800,8 @@ public class MathUtilities
                 System.out.print("(" + t.id + ", " + t.value + ")\t");
 
                 for (Integer i : t.adj)
-                    if (!queue.contains(i + 1))
-                        System.out.print("(" + (i + 1) + ") ");
-
+                    if (!queue.contains(i+1))
+                        System.out.print("(" + (i+1) + ") ");
                 System.out.println();
             }
             System.out.println();
@@ -864,20 +861,18 @@ public class MathUtilities
     {
         // build the tree
         YNode[] nodes = new YNode[ids.length];
-        for (int i = 0; i < ids.length; i++)
-        {
-            nodes[i] = new YNode(i + 1, ids[i]);
-        }
+        for (int i=0; i<ids.length; i++)
+            nodes[i] = new YNode(i+1, ids[i]);
         for (YNode node : nodes)
         {
-            for (int i = 0; i < from.length; i++)
+            for (int i=0; i<from.length; i++)
             {
                 if (from[i] == node.id)
                 {
                     if (node.left == null)
-                        node.left = nodes[to[i] - 1];
+                        node.left = nodes[to[i]-1];
                     else
-                        node.right = nodes[to[i] - 1];
+                        node.right = nodes[to[i]-1];
                 }
             }
         }
@@ -1016,7 +1011,7 @@ public class MathUtilities
     public static int[] quicksort(int[] array)
     {
         if (array.length > 1)
-            quickStep(0, array.length - 1, array);
+            quickStep(0, array.length-1, array);
         return array;
     }
 
@@ -1055,8 +1050,8 @@ public class MathUtilities
             swap(l, right, array);
 
             // recursive step each side of the pivot
-            quickStep(left, l - 1, array);   // left to pivot step
-            quickStep(l + 1, right, array);   // pivot to right step
+            quickStep(left, l-1, array);   // left to pivot step
+            quickStep(l+1, right, array);   // pivot to right step
         }
         return array;
     }
@@ -1081,7 +1076,7 @@ public class MathUtilities
         if (array.length > 1)
         {
             // get left and right sub-arrays
-            int[] a = new int[array.length / 2];
+            int[] a = new int[array.length/2];
             System.arraycopy(array, 0, a, 0, a.length);
             int[] b = new int[array.length - a.length];
             System.arraycopy(array, a.length, b, 0, b.length);
@@ -1110,7 +1105,7 @@ public class MathUtilities
         int   j    = 0;
 
         // sort and merge the arrays
-        for (int k = 0; k < sort.length; k++)
+        for (int k=0; k<sort.length; k++)
         {
             if (i >= a.length)
                 sort[k] = b[j++];
@@ -1143,11 +1138,11 @@ public class MathUtilities
         if (array.length > 1)
         {
             // build initial max heap
-            for (int i = array.length / 2 - 1; i >= 0; i--)
+            for (int i=array.length/2-1; i>=0; i--)
                 heapifyStep(array.length, i, array);
 
             // extract elements (one-by-one) from heap
-            for (int i = array.length - 1; i >= 0; i--)
+            for (int i=array.length-1; i>=0; i--)
             {
                 swap(i, 0, array);          // swap current and end
                 heapifyStep(i, 0, array); // heapify the reduced heap
@@ -1168,8 +1163,8 @@ public class MathUtilities
     public static int[] heapifyStep(int size, int pos, int[] array)
     {
         int max = pos;
-        int l   = 2 * pos + 1;
-        int r   = 2 * pos + 2;
+        int l   = 2*pos + 1;
+        int r   = 2*pos + 2;
 
         // update max position
         if ((l < size) && (array[l] > array[max]))
