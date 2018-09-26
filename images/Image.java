@@ -61,7 +61,7 @@ public class Image
     public void transform(Matrix t)
     {
         // image position matrices
-        Matrix p = new Matrix(new double[]{0.0, 0.0, 1.0});    // original
+        Matrix p = new Matrix(new double[] {0.0, 0.0, 1.0});    // original
         Matrix q;                                               // transformed
 
         // determine transformed image bounds
@@ -71,32 +71,32 @@ public class Image
         x[0] = (int) q.getValue(0, 0);
         y[0] = (int) q.getValue(1, 0);
 
-        p.setValue(0, 0, width / 1.0);
+        p.setValue(0, 0, width/1.0);
         p.setValue(1, 0, 0.0);
         q = t.cross(p);
         x[1] = (int) q.getValue(0, 0);
         y[1] = (int) q.getValue(1, 0);
 
         p.setValue(0, 0, 0.0);
-        p.setValue(1, 0, height / 1.0);
+        p.setValue(1, 0, height/1.0);
         q = t.cross(p);
         x[2] = (int) q.getValue(0, 0);
         y[2] = (int) q.getValue(1, 0);
 
-        p.setValue(0, 0, width / 1.0);
-        p.setValue(1, 0, height / 1.0);
+        p.setValue(0, 0, width/1.0);
+        p.setValue(1, 0, height/1.0);
         q = t.cross(p);
         x[3] = (int) q.getValue(0, 0);
         y[3] = (int) q.getValue(1, 0);
 
-        int h = MathUtilities.max(y) - MathUtilities.min(y);
-        int w = MathUtilities.max(x) - MathUtilities.min(x);
+        int h = MathUtilities.max(y)-MathUtilities.min(y);
+        int w = MathUtilities.max(x)-MathUtilities.min(x);
 
         t.print();
         System.out.println();
 
-        System.out.println("Old bounds: {w=" + width + ", h=" + height + "}");
-        System.out.println("New bounds: {w=" + w + ", h=" + h + "}");
+        System.out.println("Old bounds: {w="+width+", h="+height+"}");
+        System.out.println("New bounds: {w="+w+", h="+h+"}");
         System.out.println();
 
         int u;  // f1(x,y)
@@ -106,14 +106,14 @@ public class Image
         Pixmap n = new Pixmap(h, w);
 
         // compute new pixel locations
-        for (int i = 0; i < height; i++)
+        for (int i=0; i<height; i++)
         {
-            for (int j = 0; j < width; j++)
+            for (int j=0; j<width; j++)
             {
-                p.setValue(0, 0, j);        // x
-                p.setValue(1, 0, i);        // y
+                p.setValue(0, 0, j);     // x
+                p.setValue(1, 0, i);     // y
 
-                q = t.cross(p);                     // f(x,y)
+                q = t.cross(p);                 // f(x,y)
 
                 u = (int) q.getValue(1, 0);
                 v = (int) q.getValue(0, 0);
@@ -128,14 +128,14 @@ public class Image
         t.print();
         System.out.println();
 
-        for (int i = 0; i < h; i++)
+        for (int i=0; i<h; i++)
         {
-            for (int j = 0; j < w; j++)
+            for (int j=0; j<w; j++)
             {
-                p.setValue(0, 0, j);        // x
-                p.setValue(1, 0, i);        // y
+                p.setValue(0, 0, j);      // x
+                p.setValue(1, 0, i);      // y
 
-                q = t.cross(p);                     // f(x,y)
+                q = t.cross(p);                  // f(x,y)
 
                 u = (int) q.getValue(1, 0);
                 v = (int) q.getValue(0, 0);

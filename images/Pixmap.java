@@ -63,13 +63,9 @@ public class Pixmap
         filename = null;
         type = BufferedImage.TYPE_INT_ARGB;
         pixmap = new Pixel[height][width];
-        for (int i = 0; i < height; i++)
-        {
-            for (int j = 0; j < width; j++)
-            {
+        for (int i=0; i<height; i++)
+            for (int j=0; j<width; j++)
                 pixmap[i][j] = new Pixel(0);
-            }
-        }
     }
 
     /**
@@ -117,13 +113,9 @@ public class Pixmap
         }
 
         // read image pixels into pixmap
-        for (int i = 0; i < height; i++)
-        {
-            for (int j = 0; j < width; j++)
-            {
+        for (int i=0; i<height; i++)
+            for (int j=0; j<width; j++)
                 pixmap[i][j] = new Pixel(image.getRGB(j, i));
-            }
-        }
     }
 
     /**
@@ -135,17 +127,12 @@ public class Pixmap
     public HashSet<Integer> getColors()
     {
         if (colors != null)
-        {
             return colors;
-        }
+        
         colors = new HashSet<>();
-        for (int i = 0; i < height; i++)
-        {
-            for (int j = 0; j < width; j++)
-            {
+        for (int i=0; i<height; i++)
+            for (int j=0; j<width; j++)
                 colors.add(pixmap[i][j].getRGB());
-            }
-        }
         return colors;
     }
 
@@ -164,9 +151,7 @@ public class Pixmap
         {
             int x = getColorCount(c);
             if (x > max)
-            {
                 color = c;
-            }
         }
         return color;
     }
@@ -182,16 +167,10 @@ public class Pixmap
     {
         colors = getColors();
         int result = 0;
-        for (int i = 0; i < height; i++)
-        {
-            for (int j = 0; j < width; j++)
-            {
+        for (int i=0; i<height; i++)
+            for (int j=0; j<width; j++)
                 if (pixmap[i][j].getRGB() == color)
-                {
                     result++;
-                }
-            }
-        }
         return result;
     }
 
@@ -206,20 +185,13 @@ public class Pixmap
     {
         colors = getColors();
         if (!colors.contains(color))
-        {
             return null;
-        }
+        
         HashSet<int[]> result = new HashSet<>();
-        for (int i = 0; i < height; i++)
-        {
-            for (int j = 0; j < width; j++)
-            {
+        for (int i=0; i<height; i++)
+            for (int j=0; j<width; j++)
                 if (pixmap[i][j].getRGB() == color)
-                {
                     result.add(new int[]{i, j});
-                }
-            }
-        }
         return result;
     }
 
@@ -244,7 +216,7 @@ public class Pixmap
             n2 = 0;
 
             // sum pixel channel values
-            for (int i = 0; i < 3; i++)
+            for (int i=0; i<3; i++)
             {
                 n += Pixel.getRGB(i + 1, c);
                 n1 += Pixel.getRGB(i + 1, result[1]);
@@ -253,13 +225,9 @@ public class Pixmap
 
             // update max and min pixel values
             if (n < n1)
-            {
                 result[1] = c;
-            }
             if (n > n2)
-            {
                 result[2] = c;
-            }
         }
         return result;
     }
@@ -285,17 +253,11 @@ public class Pixmap
             val = Pixel.getRGB(mode, c);
 
             if (val > 0)
-            {
                 result[0]++;
-            }
             if (val < result[1])
-            {
                 result[1] = val;
-            }
             if (val > result[2])
-            {
                 result[2] = val;
-            }
         }
         return result;
     }
@@ -310,9 +272,9 @@ public class Pixmap
     {
         // set local array of pixmap data
         int[] local = new int[height * width];
-        for (int i = 0; i < height; i++)
+        for (int i=0; i<height; i++)
         {
-            for (int j = 0; j < width; j++)
+            for (int j=0; j<width; j++)
             {
                 if (pixmap[i][j] == null)
                 {
@@ -320,7 +282,7 @@ public class Pixmap
                     j = width - 1;
                     i = height;
                 }
-                local[i * width + j] = pixmap[i][j].getRGB();
+                local[i*width+j] = pixmap[i][j].getRGB();
             }
         }
 
@@ -349,13 +311,11 @@ public class Pixmap
     {
         // verify mode
         if (mode == null)
-        {
             mode = MODE[0];
-        }
 
         // determine filter for mode
         Matrix filter = CBFM[0];
-        for (int i = 0; i < MODE.length; i++)
+        for (int i=0; i<MODE.length; i++)
         {
             if (mode.equals(MODE[i]))
             {
@@ -376,13 +336,9 @@ public class Pixmap
      */
     public void filter(Matrix filter)
     {
-        for (int i = 0; i < height; i++)
-        {
-            for (int j = 0; j < width; j++)
-            {
+        for (int i=0; i<height; i++)
+            for (int j=0; j<width; j++)
                 pixmap[i][j].recolorPixel(filter);
-            }
-        }
     }
 
     /* -- member field getters -- */

@@ -72,10 +72,8 @@ public class Pixel
 		pixform = TYPE_RGB;
 
 		double[] p = new double[3];
-		for (int i = 0; i < 3; i++)
-		{
-			p[i] = getRGB(i + 1, rgb) / 255.0;
-		}
+		for (int i=0; i<3; i++)
+			p[i] = getRGB(i+1, rgb)/255.0;
 
 		pixel = new Matrix(p);
 	}
@@ -89,15 +87,13 @@ public class Pixel
 	public int getRGB()
 	{
 		if (pixform != TYPE_RGB)
-		{
 			toRGB();
-		}
 
 		int a = rgb & 0xff000000;
 
-		int r = (int) (pixel.getValue(0, 0) * 255);
-		int g = (int) (pixel.getValue(1, 0) * 255);
-		int b = (int) (pixel.getValue(2, 0) * 255);
+		int r = (int) (pixel.getValue(0, 0)*255);
+		int g = (int) (pixel.getValue(1, 0)*255);
+		int b = (int) (pixel.getValue(2, 0)*255);
 
 		r = ((r & 0xff) << 16) & 0x00ff0000;
 		g = ((g & 0xff) << 8) & 0x0000ff00;
@@ -143,7 +139,7 @@ public class Pixel
 	{
 		if (filter.getCols() == 3)
 		{
-			Matrix T = getFilter(new Matrix[]{CSTM[0], filter, CSTM[1]});
+			Matrix T = getFilter(new Matrix[] {CSTM[0], filter, CSTM[1]});
 			pixel = T.cross(pixel);
 		}
 		else
@@ -166,11 +162,9 @@ public class Pixel
 	 */
 	public Matrix getFilter(Matrix[] filter)
 	{
-		Matrix T = filter[filter.length - 1];
-		for (int i = filter.length - 2; i >= 0; i--)
-		{
+		Matrix T = filter[filter.length-1];
+		for (int i=filter.length-2; i>=0; i--)
 			T = T.cross(filter[i]);
-		}
 		return T;
 	}
 
@@ -203,9 +197,7 @@ public class Pixel
 	public void toRGB()
 	{
 		if (pixform == TYPE_RGB)
-		{
 			return;
-		}
 
 		if (pixform == TYPE_XYZ)
 		{
@@ -220,9 +212,7 @@ public class Pixel
 	public void toXYZ()
 	{
 		if (pixform == TYPE_XYZ)
-		{
 			return;
-		}
 
 		if (pixform == TYPE_RGB)
 		{
@@ -259,14 +249,12 @@ public class Pixel
 		double[] pix = new double[3];
 
 		// compute the filtered pixel channel values (cross product)
-		for (int i = 0; i < 3; i++)
+		for (int i=0; i<3; i++)
 		{
 			pix[i] = 0.0;
 
-			for (int j = 0; j < 3; j++)
-			{
+			for (int j=0; j<3; j++)
 				pix[i] += (filter[i][j] * pixel.getValue(j, 0));
-			}
 		}
 
 		// set the filtered pixel channel values
