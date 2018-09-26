@@ -73,7 +73,7 @@ public class Complex
     {
         double rr = re*b.getReal();
         double ii = im*b.getImag();
-        return new Complex( rr - ii, rr + ii);
+        return new Complex(rr - ii, rr + ii);
     }
 
     /**
