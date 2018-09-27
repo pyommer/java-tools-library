@@ -167,6 +167,23 @@ public class Pixel
             T = T.cross(filter[i]);
         return T;
     }
+    
+    /**
+     * This method returns the transformation filter matrix of the combined
+     * filter matrices specified by the mode and applied to the specified filter
+     * matrix.
+     *
+     * @param filter The filter matrix to combine.
+     * @return    The transformation matrix of the combined filters in the array.
+     */
+    public static Matrix getFilter(int mode, Matrix filter)
+    {
+        if (mode == 1)
+        {
+            return CSTM[1].cross(filter).cross(CSTM[0]);
+        }
+        return filter;
+    }
 
     /**
      * This method filters the pixel by the specified filter matrix by
