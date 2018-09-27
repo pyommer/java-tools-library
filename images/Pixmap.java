@@ -341,6 +341,36 @@ public class Pixmap
                 pixmap[i][j].recolorPixel(filter);
     }
 
+    /**
+     * This method applies the specified recoloring filter to each pixel color
+     * value in the pixmap, using a hashtable to store previously filtered
+     * pixel RGB values.
+     *
+     * @param filter The filter matrix to each pixel color value.
+     */
+    public void filterReduced(Matrix filter)
+    {
+        Hashtable<Integer, Integer> table = new Hashtable<>();
+        int rgb;
+        for (int i=0; i<height; i++)
+        {
+            for (int j=0; j<width; j++)
+            {
+                rgb = pixmap[i][j].getRGB();
+
+                if (!table.containsKey(rgb))
+                {
+                    pixmap[i][j].recolorPixel(filter);
+                    table.put(rgb, pixmap[i][j].getRGB());
+                }
+                else
+                {
+                    pixmap[i][j] = new Pixel(table.get(rgb));
+                }
+            }
+        }
+    }
+
     /* -- member field getters -- */
 
     /**
