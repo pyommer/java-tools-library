@@ -148,11 +148,8 @@ public class Pixmap
         int max   = 0;
         colors = getColors();
         for (Integer c : colors)
-        {
-            int x = getColorCount(c);
-            if (x > max)
+            if (getColorCount(c) > max)
                 color = c;
-        }
         return color;
     }
 
