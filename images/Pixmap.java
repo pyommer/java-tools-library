@@ -30,12 +30,12 @@ public class Pixmap
                                                {0.000, 0.433, 0.567},
                                                {0.000, 0.475, 0.525}};
 
-    public static final Matrix[] CBFM = new Matrix[]{new Matrix(PROTAN3),
-                                                     new Matrix(DEUTAN3),
-                                                     new Matrix(TRITAN3),
-                                                     new Matrix(PROTAN1),
-                                                     new Matrix(DEUTAN1),
-                                                     new Matrix(TRITAN1)};
+    public static final Matrix[] CBFM = new Matrix[] {new Matrix(PROTAN3),
+                                                      new Matrix(DEUTAN3),
+                                                      new Matrix(TRITAN3),
+                                                      new Matrix(PROTAN1),
+                                                      new Matrix(DEUTAN1),
+                                                      new Matrix(TRITAN1)};
 
     // recoloring modes for the pixmap
     private static final String[] MODE = {"p", "d", "t"};
@@ -50,8 +50,8 @@ public class Pixmap
     private HashSet<Integer> colors;    // set of distinct colors in the pixmap
 
     /**
-     * This method constructs a new pixmap of the specified size and initializes
-     * the pixels to zero (0x00000000).
+     * This method constructs a new pixmap of the specified size and 
+     * initializes the pixels to zero (0x00000000).
      *
      * @param height The height of the pixmap.
      * @param width  The width of the pixmap.
@@ -108,7 +108,7 @@ public class Pixmap
         // verify pixels are in ARGB format
         if (type != BufferedImage.TYPE_INT_ARGB)
         {
-            //System.out.println("Pixels not in ARGB format, using ARGB instead.");
+            System.out.println("Pixels not in ARGB format, using ARGB instead.");
             type = BufferedImage.TYPE_INT_ARGB;
         }
 
@@ -157,8 +157,8 @@ public class Pixmap
     }
 
     /**
-     * This method returns the number of times the specified color value appears
-     * in the pixmap.
+     * This method returns the number of times the specified color value 
+     * appears in the pixmap.
      *
      * @param color The color value to count.
      * @return The count of color in the pixmap.
@@ -191,7 +191,7 @@ public class Pixmap
         for (int i=0; i<height; i++)
             for (int j=0; j<width; j++)
                 if (pixmap[i][j].getRGB() == color)
-                    result.add(new int[]{i, j});
+                    result.add(new int[] {i, j});
         return result;
     }
 
@@ -205,7 +205,7 @@ public class Pixmap
     {
         colors = getColors();
 
-        int[] result = new int[]{colors.size(), ((255 << 16) | (255 << 8) | 255), 0};
+        int[] result = new int[] {colors.size(), 0xffffff, 0};
         int   n, n1, n2;
 
         // find max and min pixel values
@@ -218,9 +218,9 @@ public class Pixmap
             // sum pixel channel values
             for (int i=0; i<3; i++)
             {
-                n += Pixel.getRGB(i + 1, c);
-                n1 += Pixel.getRGB(i + 1, result[1]);
-                n2 += Pixel.getRGB(i + 1, result[2]);
+                n += Pixel.getRGB(i+1, c);
+                n1 += Pixel.getRGB(i+1, result[1]);
+                n2 += Pixel.getRGB(i+1, result[2]);
             }
 
             // update max and min pixel values
@@ -244,7 +244,7 @@ public class Pixmap
     {
         colors = getColors();
 
-        int[] result = new int[]{0, 255, 0};
+        int[] result = new int[] {0, 255, 0};
         int   val;
 
         // sum pixels with color and find max and min channel values
@@ -271,7 +271,7 @@ public class Pixmap
     public void writeImage(String filename)
     {
         // set local array of pixmap data
-        int[] local = new int[height * width];
+        int[] local = new int[height*width];
         for (int i=0; i<height; i++)
         {
             for (int j=0; j<width; j++)
@@ -279,7 +279,7 @@ public class Pixmap
                 if (pixmap[i][j] == null)
                 {
                     System.out.println("ERROR! Pixmap location (" + i + ", " + j + ") is null.");
-                    j = width - 1;
+                    j = width-1;
                     i = height;
                 }
                 local[i*width+j] = pixmap[i][j].getRGB();
@@ -404,8 +404,8 @@ public class Pixmap
     }
 
     /**
-     * This method returns the two-dimensional array of pixels representing this
-     * pixmap.
+     * This method returns the two-dimensional array of pixels representing
+     * this pixmap.
      *
      * @return The pixmap array.
      */
@@ -423,7 +423,7 @@ public class Pixmap
      */
     public Pixel getPixel(int i, int j)
     {
-        if ((pixmap == null) || ((i < 0) || (i >= height)) || ((j < 0) || (j >= width)))
+        if ((pixmap == null) || ((i<0) || (i>=height)) || ((j<0) || (j>=width)))
         {
             return null;
         }
@@ -441,12 +441,12 @@ public class Pixmap
      */
     public void setPixel(int i, int j, Pixel p)
     {
-        if ((pixmap == null) || ((i < 0) || (i >= height)) || ((j < 0) || (j >= width)))
+        if ((pixmap == null) || ((i<0) || (i>=height)) || ((j<0) || (j>=width)))
         {
             return;
         }
 
-        pixmap[i][j] = p;
+        pixmap[i][j] = new Pixel(p.getRGB());
     }
 }
 
